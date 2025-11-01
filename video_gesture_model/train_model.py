@@ -181,11 +181,21 @@ def main() -> None:
             save_weights_only=True,
             verbose=1,
         ),
+        # Registra los logs para tensorboard
         tf.keras.callbacks.TensorBoard(
             log_dir=str(config.LOGS_DIR / datetime.now().strftime("logs_%Y%m%d_%H%M%S"))
         ),
+        # Detiene el entrenamiento si no hay mejora en validación durante 10 épocas
         tf.keras.callbacks.EarlyStopping(
             patience=10, restore_best_weights=True, monitor="val_accuracy", mode="max"
+        ),
+        # Reduce la tasa de aprendizaje cuando la val_loss deja de mejorar
+        tf.keras.callbacks.ReduceLROnPlateau(
+            monitor="val_loss",
+            factor=0.5,       # Reduce a la mitad el LR
+            patience=4,        # Espera 4 épocas sin mejora antes de reducir
+            min_lr=1e-6,       # Nunca baja más allá de este valor
+            verbose=1,
         ),
     ]
 
