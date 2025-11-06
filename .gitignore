@@ -22,3 +22,5 @@ build/
 # Local development settings
 *.log
 .DS_Store
+# Local tests
+video_gesture_model/tests/
