@@ -43,7 +43,7 @@ def parse_args() -> argparse.Namespace:
         help="Optional path to labels.json. If omitted, the script looks inside the model directory.",
     )
     parser.add_argument("--device", type=int, default=0, help="Índice de cámara para OpenCV.")
-    parser.add_argument("--confidence-threshold", type=float, default=0.7, help="Umbral de confianza para mostrar etiqueta.")
+    parser.add_argument("--confidence-threshold", type=float, default=0.8, help="Umbral de confianza para mostrar etiqueta.")
     parser.add_argument("--sequence-length", type=int, default=config.SEQUENCE_LENGTH, help="Longitud de la ventana temporal.")
     return parser.parse_args()
 
